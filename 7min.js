@@ -3,23 +3,42 @@ var bing = new Audio('bing.mp3');
 var count = 1;
 var stage = 1;
 
+function reset() {
+  document.querySelector('.content').classList.toggle('animate');
+  count = 1;
+  stage = 1;
+}
+
 function tick() {
   setTimeout(function () {
-    if (count % 40 < 30 && count % 40 > 0) {
+    if (count % 40 < 30) {
       click.play();
+      if (count % 40 == 0) {
+        document.querySelector('.stage-' + stage + ' .rest').classList.toggle('on')
+        document.querySelector('.stage-' + stage + ' .done').classList.toggle('on')
+        stage++;
+      }
     } else if (count % 40 == 30) {
       document.querySelector('.stage-' + stage + ' .timer').classList.toggle('off')
       document.querySelector('.stage-' + stage + ' .rest').classList.toggle('on')
       bing.play();
-    } else if (count % 40 == 0) {
-      document.querySelector('.stage-' + stage + ' .rest').classList.toggle('on')
-      document.querySelector('.stage-' + stage + ' .done').classList.toggle('on')
-      stage++;
     }
+
     count++;
-    tick();
+
+    if (count < 470) {
+      tick();
+    } else {
+      reset();
+    }
   }, 1000);
 }
+
+document.querySelector('.overlay').addEventListener('click', function() {
+  document.querySelector('.content').classList.toggle('animate');
+  this.classList.toggle('on');
+  tick();
+});
 
 document.querySelector('.mute').addEventListener('click', function() {
   click.volume = click.volume == 1 ? 0 : 1;
@@ -27,5 +46,3 @@ document.querySelector('.mute').addEventListener('click', function() {
   this.classList.toggle('fa-volume-up');
   this.classList.toggle('fa-volume-off');
 });
-
-tick();
