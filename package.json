@@ -1,0 +1,28 @@
+{
+  "name": "7min",
+  "version": "1.0.0",
+  "description": "Simple 7min workout app",
+  "dependencies": {
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^4.0.0",
+    "gulp-cssnano": "^2.1.2",
+    "gulp-sass": "^3.1.0",
+    "gulp-sourcemaps": "^2.6.0",
+    "run-sequence": "^1.2.2"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jamiehenson/7min.git"
+  },
+  "author": "Jamie Henson",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jamiehenson/7min/issues"
+  },
+  "homepage": "https://github.com/jamiehenson/7min#readme"
+}

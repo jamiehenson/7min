@@ -1,3 +1,5 @@
+$colours: #F6D258 #EFCEC5 #D1AF94 #97D5E0 #88B14B #EF562D #D13076 #5587A2 #5C7148 #0C4C8A #7539A9 #FF954D;
+
 html, body {
   margin: 0;
   padding: 0;
@@ -53,12 +55,13 @@ html, body {
       top: 0;
       left: 0;
       display: block;
-      width: 100%;
+      width: 0%;
       height: 100%;
       background: rgba(0, 0, 0, 0.3);
       content: '';
       transition: opacity 0.45s;
       animation: progress 30s linear;
+      animation-fill-mode: forwards;
     }
 
     .stage-title {
@@ -78,57 +81,18 @@ html, body {
         animation: counter steps(30);
         animation-duration: 30s;
         animation-play-state: running;
-
         animation-fill-mode: forwards;
       }
     }
 
-    &.one {
-      background-color: #F6D258;
-    }
-
-    &.two {
-      background-color: #EFCEC5;
-    }
-
-    &.three {
-      background-color: #D1AF94;
-    }
-
-    &.four {
-      background-color: #97D5E0;
-    }
-
-    &.five {
-      background-color: #88B14B;
-    }
-
-    &.six {
-      background-color: #EF562D;
-    }
-
-    &.seven {
-      background-color: #D13076;
-    }
-
-    &.eight {
-      background-color: #5587A2;
-    }
-
-    &.nine {
-      background-color: #5C7148;
-    }
-
-    &.ten {
-      background-color: #0C4C8A;
-    }
-
-    &.eleven {
-      background-color: #7539A9;
-    }
-
-    &.twelve {
-      background-color: #FF954D;
+    @each $colour in $colours {
+      $i: index($colours, $colour);
+      &.stage-#{$i} {
+        background-color: $colour;
+        &:before, .counter:after {
+          animation-delay: #{40 * $i - 40}s;
+        }
+      }
     }
   }
 }
