@@ -4,6 +4,7 @@ var count = 1;
 var stage = 1;
 
 function reset() {
+  document.querySelector('.overlay.finished').classList.toggle('on')
   document.querySelector('.content').classList.toggle('animate');
   count = 1;
   stage = 1;
@@ -29,6 +30,7 @@ function tick() {
     if (count < 470) {
       tick();
     } else {
+      bing.play();
       reset();
     }
   }, 1000);
