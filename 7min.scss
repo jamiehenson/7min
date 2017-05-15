@@ -6,8 +6,9 @@ html, body {
   width: 100%;
   height: 100%;
   color: #FFF;
-  font-size: 1.2em;
   font-family: 'Oswald', 'Helvetica', 'sans-serif';
+  font-size: 16px;
+  background: #333;
 }
 
 * {
@@ -35,19 +36,33 @@ html, body {
   .stage {
     position: relative;
     display: flex;
-    flex-direction: column;
     padding: 5px;
-    width: calc(100% / 6);
-    height: 50%;
     text-align: center;
-
+    transition: 0.5s all;
     align-items: center;
     justify-content: center;
 
-    @media(max-width: 600px) {
+    @media(min-width: 769px) {
+      flex-direction: column;
+      width: calc(100% / 6);
+      height: 50%;
+      font-size: 28px;
+      .stage-title, .icons {
+        padding: 0 5px 10px;
+      }
+      .counter {
+        font-size: 44px;
+      }
+    }
+
+    @media(max-width: 768px) {
       flex-direction: row;
       width: 100%;
       height: initial;
+      font-size: 19px;
+      .stage-title, .icons {
+        padding: 0 5px;
+      }
     }
 
     &:before {
@@ -59,14 +74,34 @@ html, body {
       height: 100%;
       background: rgba(0, 0, 0, 0.3);
       content: '';
-      transition: opacity 0.45s;
-      animation: progress 30s linear;
+      animation: progress 40s linear;
       animation-fill-mode: forwards;
     }
 
     .stage-title {
       position: relative;
       z-index: 10;
+    }
+
+    .icons {
+      display: flex;
+      z-index: 10;
+      .fa {
+        padding: 0 5px;
+        position: relative;
+      }
+      .timer {
+        opacity: 1;
+        &.off {
+          opacity: 0.3;
+        }
+      }
+      .done, .rest {
+        opacity: 0.3;
+        &.on {
+          opacity: 1;
+        }
+      }
     }
 
     .counter {
@@ -76,10 +111,10 @@ html, body {
 
       &:after {
         position: relative;
-        content: '30\A 29\A 28\A 27\A 26\A 25\A 24\A 23\A 22\A 21\A 20\A 19\A 18\A 17\A 16\A 15\A 14\A 13\A 12\A 11\A 10\A 9\A 8\A 7\A 6\A 5\A 4\A 3\A 2\A 1\A 0\A';
+        content: '30\A 29\A 28\A 27\A 26\A 25\A 24\A 23\A 22\A 21\A 20\A 19\A 18\A 17\A 16\A 15\A 14\A 13\A 12\A 11\A 10\A 9\A 8\A 7\A 6\A 5\A 4\A 3\A 2\A 1\A 10\A 9\A 8\A 7\A 6\A 5\A 4\A 3\A 2\A 1\A';
         white-space: pre;
-        animation: counter steps(30);
-        animation-duration: 30s;
+        animation: counter steps(40);
+        animation-duration: 40s;
         animation-play-state: running;
         animation-fill-mode: forwards;
       }
@@ -108,7 +143,7 @@ html, body {
     flex: 1;
     margin: 0;
     padding-left: 10px;
-    font-size: 0.6em;
+    font-size: 16px;
   }
 
   .buttons {
@@ -119,7 +154,12 @@ html, body {
     justify-content: flex-end;
 
     i {
-      padding: 0 5px;
+      padding: 0 10px;
+      font-size: 20px;
+      &:hover {
+        color: lightgrey;
+        cursor: pointer;
+      }
     }
 
     a {
@@ -136,16 +176,29 @@ html, body {
   }
 
   to {
-    top: -30em;
+    top: -40em;
   }
 }
 
 @keyframes progress {
-  from {
+  0% {
     width: 0;
   }
 
-  to {
+  75% {
+    background-color: rgba(0,0,0,0.5);
+  }
+
+  76% {
+    background-color: rgba(red, 0.5);
+  }
+
+  99% {
+    background-color: rgba(red, 0.5);
+  }
+
+  100% {
     width: 100%;
+    background-color: rgba(green, 0.75);
   }
 }
