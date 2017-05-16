@@ -127,6 +127,12 @@ html, body {
         .stage-title, .icons, .counter {
           font-size: 60px;
         }
+        &.stage-5, &.stage-8 {
+          width: 50%;
+        }
+        &.stage-6, &.stage-7 {
+          width: 37.5%;
+        }
       }
 
       .stage-title, .icons {
