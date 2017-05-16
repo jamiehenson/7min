@@ -1,7 +1,8 @@
 var click = new Audio('click.mp3');
 var bing = new Audio('bing.mp3');
-var count = 1;
-var stage = 1;
+var count = 1, stage = 1, timer = 3;
+var stageCounter, stageRest, stageDone, stageTimer;
+var overlay = document.querySelector('.overlay');
 
 function reset() {
   document.querySelector('.overlay.finished').classList.toggle('on')
@@ -10,36 +11,68 @@ function reset() {
   stage = 1;
 }
 
-function tick() {
+function setStageElements() {
+  stageCounter = document.querySelector('.stage-' + stage + ' .counter');
+  stageRest = document.querySelector('.stage-' + stage + ' .rest');
+  stageDone = document.querySelector('.stage-' + stage + ' .done');
+  stageTimer = document.querySelector('.stage-' + stage + ' .timer');
+}
+
+function startExercise() {
+  timer = 30;
+  document.querySelector('.content').classList.toggle('animate');
+  document.querySelector('.stage-1 .counter').innerHTML = "30";
+  overlay.classList.toggle('on');
+  setStageElements();
+  tick();
+}
+
+function tick(start) {
   setTimeout(function () {
-    if (count % 40 < 30) {
-      click.play();
-      if (count % 40 == 0) {
-        document.querySelector('.stage-' + stage + ' .rest').classList.toggle('on')
-        document.querySelector('.stage-' + stage + ' .done').classList.toggle('on')
-        stage++;
+    timer--;
+
+    if (start) {
+      overlay.innerHTML = timer;
+      if (timer > 0) {
+        tick(true)
+      } else {
+        startExercise()
       }
-    } else if (count % 40 == 30) {
-      document.querySelector('.stage-' + stage + ' .timer').classList.toggle('off')
-      document.querySelector('.stage-' + stage + ' .rest').classList.toggle('on')
-      bing.play();
-    }
-
-    count++;
-
-    if (count < 470) {
-      tick();
     } else {
-      bing.play();
-      reset();
+      if (count % 40 < 30) {
+        click.play();
+        if (count % 40 == 0) {
+          stageRest.classList.toggle('on')
+          stageDone.classList.toggle('on')
+          stageCounter.innerHTML = "DONE";
+          stage++;
+          timer = 30;
+          setStageElements();
+          stageTimer.classList.toggle('on')
+        }
+      } else if (count % 40 == 30) {
+        bing.play();
+        timer = 10;
+        stageTimer.classList.toggle('on')
+        stageRest.classList.toggle('on')
+      }
+
+      stageCounter.innerHTML = timer;
+      count++;
+
+      if (count <= 470) {
+        tick();
+      } else {
+        bing.play();
+        reset();
+      }
     }
   }, 1000);
 }
 
 document.querySelector('.overlay').addEventListener('click', function() {
-  document.querySelector('.content').classList.toggle('animate');
-  this.classList.toggle('on');
-  tick();
+  overlay.innerHTML = timer;
+  tick(true);
 });
 
 document.querySelector('.mute').addEventListener('click', function() {

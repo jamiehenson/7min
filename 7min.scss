@@ -16,19 +16,9 @@ html, body {
 }
 
 .animate {
-  .counter:after, .stage:before {
-    animation-fill-mode: forwards;
-  }
-
   .stage:before {
     animation: progress 40s linear;
-
     animation-fill-mode: forwards;
-  }
-
-  .counter:after {
-    animation: counter steps(40);
-    animation-duration: 40s;
   }
 }
 
@@ -43,6 +33,8 @@ html, body {
   height: 100%;
   background: rgba(#333, 0.8);
   text-align: center;
+  font-size: 150px;
+  padding: 10px;
 
   align-items: center;
   justify-content: center;
@@ -84,7 +76,7 @@ html, body {
     align-items: center;
     justify-content: center;
 
-    @media(min-width: 769px) {
+    @media only screen and (min-width: 769px) {
       flex-direction: column;
       width: calc(100% / 6);
       height: 50%;
@@ -99,11 +91,17 @@ html, body {
       }
     }
 
-    @media(max-width: 768px) {
+    @media only screen and (max-width: 768px) {
       flex-direction: row;
       width: 100%;
       height: initial;
       font-size: 19px;
+      justify-content: space-between;
+
+      .wrap {
+        display: flex;
+        padding-right: 5px;
+      }
 
       .stage-title, .icons {
         padding: 0 5px;
@@ -133,17 +131,6 @@ html, body {
       .fa {
         position: relative;
         padding: 0 5px;
-      }
-
-      .timer {
-        opacity: 1;
-
-        &.off {
-          opacity: 0.3;
-        }
-      }
-
-      .done, .rest {
         opacity: 0.3;
 
         &.on {
@@ -153,15 +140,10 @@ html, body {
     }
 
     .counter {
-      overflow: hidden;
+      position: relative;
       height: 1em;
       line-height: 1em;
-
-      &:after {
-        position: relative;
-        content: '30\A 29\A 28\A 27\A 26\A 25\A 24\A 23\A 22\A 21\A 20\A 19\A 18\A 17\A 16\A 15\A 14\A 13\A 12\A 11\A 10\A 9\A 8\A 7\A 6\A 5\A 4\A 3\A 2\A 1\A 10\A 9\A 8\A 7\A 6\A 5\A 4\A 3\A 2\A 1\A';
-        white-space: pre;
-      }
+      z-index: 10;
     }
 
     @each $colour in $colours {
@@ -170,7 +152,7 @@ html, body {
       &.stage-#{$i} {
         background-color: $colour;
 
-        &:before, .counter:after {
+        &:before {
           animation-delay: #{40 * $i - 40}s;
         }
       }
@@ -214,16 +196,6 @@ html, body {
       text-decoration: none;
       line-height: 1em;
     }
-  }
-}
-
-@keyframes counter {
-  from {
-    top: 0;
-  }
-
-  to {
-    top: -40em;
   }
 }
 
