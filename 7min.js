@@ -5,6 +5,9 @@ var overlay = document.querySelector('.overlay');
 
 function reset() {
   document.querySelector('.stage-12 .counter').innerHTML = "DONE";
+  document.querySelectorAll('.stage .icons .fa').forEach(function(icon) {
+    icon.classList.remove("on");
+  });
   overlay.innerHTML = "<h1>Smashed it.</h1><p>Click anywhere to go again</p>";
   overlay.classList.toggle('on')
   document.querySelector('.content').classList.toggle('animate');
@@ -25,8 +28,12 @@ function setStageElements() {
 
 function startExercise() {
   timer = 30;
-  document.querySelector('.content').classList.toggle('animate');
+  document.querySelectorAll('.stage .counter').forEach(function(counter) {
+    counter.innerHTML = "--";
+  });
   document.querySelector('.stage-1 .counter').innerHTML = "30";
+  document.querySelector('.stage-1 .timer').classList.toggle('on')
+  document.querySelector('.content').classList.toggle('animate');
   overlay.classList.toggle('on');
   overlay.classList.toggle('started')
   setStageElements();
