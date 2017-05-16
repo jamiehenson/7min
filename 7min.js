@@ -4,6 +4,8 @@ var count, stage, timer, stageCounter, stageRest, stageDone, stageTimer;
 var overlay = document.querySelector('.overlay');
 
 function reset() {
+  document.querySelector('.stage-1').classList.add("active");
+  document.querySelector('.stage-12').classList.remove("active");
   document.querySelector('.stage-12 .counter').innerHTML = "DONE";
   document.querySelectorAll('.stage .icons .fa').forEach(function(icon) {
     icon.classList.remove("on");
@@ -24,6 +26,7 @@ function setStageElements() {
   stageRest = document.querySelector('.stage-' + stage + ' .rest');
   stageDone = document.querySelector('.stage-' + stage + ' .done');
   stageTimer = document.querySelector('.stage-' + stage + ' .timer');
+  stageActive = document.querySelector('.stage-' + stage);
 }
 
 function startExercise() {
@@ -58,9 +61,11 @@ function tick(start) {
           stageRest.classList.toggle('on')
           stageDone.classList.toggle('on')
           stageCounter.innerHTML = "DONE";
+          stageActive.classList.toggle('active')
           stage++;
           timer = 30;
           setStageElements();
+          stageActive.classList.toggle('active')
           stageTimer.classList.toggle('on')
         }
       } else if (count % 40 == 30) {

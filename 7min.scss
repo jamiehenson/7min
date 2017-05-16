@@ -118,9 +118,16 @@ html, body {
 
     @media only screen and (min-width: 769px) {
       flex-direction: column;
-      width: calc(100% / 6);
+      width: 12.5%;
       height: 50%;
       font-size: 28px;
+
+      &.active {
+        width: 62.5%;
+        .stage-title, .icons, .counter {
+          font-size: 60px;
+        }
+      }
 
       .stage-title, .icons {
         padding: 0 5px 10px;
