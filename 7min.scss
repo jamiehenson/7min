@@ -157,6 +157,10 @@ html, body {
       .stage-title {
         font-size: 24px;
       }
+
+      .icons, .counter {
+        font-size: 30px;
+      }
     }
 
     @each $colour in $colours {
