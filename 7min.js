@@ -28,6 +28,7 @@ function startExercise() {
   document.querySelector('.content').classList.toggle('animate');
   document.querySelector('.stage-1 .counter').innerHTML = "30";
   overlay.classList.toggle('on');
+  overlay.classList.toggle('started')
   setStageElements();
   tick();
 }
@@ -76,9 +77,13 @@ function tick(start) {
 }
 
 overlay.addEventListener('click', function() {
+  if (overlay.classList.contains("started")) {
+    return;
+  }
   initialiseCounters();
   overlay.innerHTML = timer;
   tick(true);
+  overlay.classList.toggle("started")
 });
 
 document.querySelector('.mute').addEventListener('click', function() {
