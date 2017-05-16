@@ -35,6 +35,7 @@ html, body {
   text-align: center;
   font-size: 150px;
   padding: 10px;
+  cursor: pointer;
 
   align-items: center;
   justify-content: center;
@@ -162,7 +163,7 @@ html, body {
 
 .info {
   display: flex;
-  height: 30px;
+  height: 36px;
   background: #333;
 
   align-items: center;
@@ -171,7 +172,7 @@ html, body {
     flex: 1;
     margin: 0;
     padding-left: 10px;
-    font-size: 16px;
+    font-size: 18px;
   }
 
   .buttons {
@@ -183,7 +184,7 @@ html, body {
 
     i {
       padding: 0 10px;
-      font-size: 20px;
+      font-size: 26px;
 
       &:hover {
         color: lightgrey;

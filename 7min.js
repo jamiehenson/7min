@@ -1,14 +1,19 @@
 var click = new Audio('click.mp3');
 var bing = new Audio('bing.mp3');
-var count = 1, stage = 1, timer = 3;
-var stageCounter, stageRest, stageDone, stageTimer;
+var count, stage, timer, stageCounter, stageRest, stageDone, stageTimer;
 var overlay = document.querySelector('.overlay');
 
 function reset() {
-  document.querySelector('.overlay.finished').classList.toggle('on')
+  document.querySelector('.stage-12 .counter').innerHTML = "DONE";
+  overlay.innerHTML = "<h1>Smashed it.</h1><p>Click anywhere to go again</p>";
+  overlay.classList.toggle('on')
   document.querySelector('.content').classList.toggle('animate');
+}
+
+function initialiseCounters() {
   count = 1;
   stage = 1;
+  timer = 3;
 }
 
 function setStageElements() {
@@ -70,7 +75,8 @@ function tick(start) {
   }, 1000);
 }
 
-document.querySelector('.overlay').addEventListener('click', function() {
+overlay.addEventListener('click', function() {
+  initialiseCounters();
   overlay.innerHTML = timer;
   tick(true);
 });
